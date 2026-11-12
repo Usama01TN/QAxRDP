@@ -11,9 +11,9 @@ if ROOT not in path:
     path.insert(0, ROOT)
 
 try:
-    from .qtapp import application
+    from .qtapp import application, deleteNow
 except:
-    from qtapp import application
+    from qtapp import application, deleteNow
 
 application()
 from QAxRDP import RemoteDesktopWidget, isActiveXAvailable
@@ -33,9 +33,29 @@ class ActiveXTest(TestCase):
 
     def tearDown(self):
         """
+        Deletes the widget now (inside the event loop, as an application does), not at interpreter exit.
         :return:
         """
-        self.rdp.deleteLater()
+        if self.rdp is not None:
+            self.assertTrue(deleteNow(self.rdp))
+
+    def test_delete_with_live_control(self):
+        """
+        Deleting a widget whose RDP control is alive (e.g. closing a tab) must not crash.
+        :return:
+        """
+        self.assertTrue(self.rdp.controlAvailable)
+        self.assertTrue(deleteNow(self.rdp))
+        self.rdp = None  # type: None
+
+    def test_delete_after_release(self):
+        """
+        :return:
+        """
+        self.rdp.releaseControl()
+        self.assertFalse(self.rdp.controlAvailable)
+        self.assertTrue(deleteNow(self.rdp))
+        self.rdp = None  # type: None
 
     def test_control(self):
         """

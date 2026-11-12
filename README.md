@@ -399,12 +399,6 @@ absolute (pinned to the released commit), so the repository must be public for t
   marked as such in `docs/API.md`.
 - Settings are sent to the control when set. Most of them only take effect at the next connection.
 
-## Logo and banner:
-
-The logo (`docs/images/logo.svg`, `.png`) and the banner (`docs/images/banner.svg`, `.png`, 1280x640, the size of
-GitHub's social preview) are drawn by `tools/branding/makebranding.py`, which also writes the application icon and
-the Designer icons. The SVG files contain no text elements (texts are outlines), so they render the same everywhere.
-
 ## License:
 
 GPLv3, see [LICENSE](LICENSE). Copyright 2022-2026 Aininou Usama (ininou.oussematn@gmail.com).

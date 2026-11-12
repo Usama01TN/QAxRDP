@@ -3,8 +3,8 @@
 Shared QApplication for the tests (offscreen platform except on Windows, where ActiveX needs a real desktop).
 """
 from os.path import dirname, abspath
-from atexit import register
 from os import environ, name
+from atexit import register
 from sys import path
 
 ROOT = dirname(dirname(abspath(__file__)))  # type: str
@@ -28,23 +28,37 @@ def application():
 
 def cleanup():
     """
-    The tests never run QApplication.exec(), so aboutToQuit is never emitted and deleteLater() never runs: release
-    the ActiveX controls and delete the remaining widgets while the QApplication still exists (otherwise the COM
-    controls are destroyed in arbitrary order when the interpreter exits).
+    Safety net for "python -m unittest": the tests never run QApplication.exec(), so aboutToQuit is never emitted;
+    release the ActiveX controls still alive while the QApplication exists. Widgets are deliberately not deleted
+    here: destroying the remaining native windows in bulk at interpreter exit crashed on Windows (access violation).
+    Tests delete their widgets with deleteNow(), and "python -m tests" ends the process right after the run.
     :return:
     """
-    from ManyQt.QtCore import QCoreApplication, QEvent
     if not _APPLICATION:
         return
-    app = _APPLICATION[0]  # type: QApplication
-    for widget in app.allWidgets():
-        if hasattr(widget, 'releaseControl'):
-            widget.releaseControl()
-    for widget in app.topLevelWidgets():
-        widget.close()
-        widget.deleteLater()
+    try:
+        from QAxRDP import RemoteDesktopWidget
+    except:
+        return
+    # Select the widgets before releasing anything: releasing a control destroys its internal native widgets.
+    widgets = [w for w in _APPLICATION[0].allWidgets() if isinstance(w, RemoteDesktopWidget)]  # type: list
+    for widget in widgets:
+        widget.releaseControl()
+
+
+def deleteNow(obj):
+    """
+    Deletes a QObject now, through the event loop like deleteLater() in an application.
+    :param obj: QObject
+    :return: (bool) True if the object was destroyed.
+    """
+    from ManyQt.QtCore import QCoreApplication, QEvent
+    destroyed = []  # type: list[bool]
+    obj.destroyed.connect(lambda *args: destroyed.append(True))
+    obj.deleteLater()
+    processEvents(0)
     QCoreApplication.sendPostedEvents(None, QEvent.DeferredDelete)
-    app.processEvents()
+    return bool(destroyed)
 
 
 def processEvents(ms=0):

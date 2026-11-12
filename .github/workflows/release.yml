@@ -105,7 +105,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -X faulthandler -m unittest discover -s tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
+          python -X faulthandler -m tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
           code=${PIPESTATUS[0]}
           set -e
           if [ "$code" -ne 0 ] && tail -n 3 "$RUNNER_TEMP/tests.log" | grep -q '^OK'; then
@@ -135,7 +135,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python -X faulthandler -m unittest discover -s tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
+          python -X faulthandler -m tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
           code=${PIPESTATUS[0]}
           set -e
           if [ "$code" -ne 0 ] && tail -n 3 "$RUNNER_TEMP/tests.log" | grep -q '^OK'; then

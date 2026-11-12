@@ -7,9 +7,9 @@ from unittest import TestCase, main
 from sys import modules
 
 try:
-    from .qtapp import application
-except ImportError:
-    from qtapp import application
+    from .qtapp import application, deleteNow
+except:
+    from qtapp import application, deleteNow
 
 application()
 from ManyQt.QtWidgets import QWidget
@@ -132,6 +132,24 @@ class LifecycleTest(TestCase):
         calls = rdp.getAxWidget().calls
         self.assertIn(('SetServer(QString)', 'first.invalid'), calls)
         self.assertIn(('SetUserName(QString)', 'bob'), calls)
+
+    def test_delete_with_live_control(self):
+        """
+        :return:
+        """
+        rdp = RemoteDesktopWidget()  # type: RemoteDesktopWidget
+        self.assertTrue(rdp.controlAvailable)
+        self.assertTrue(deleteNow(rdp))
+
+    def test_delete_after_release(self):
+        """
+        :return:
+        """
+        rdp = RemoteDesktopWidget()  # type: RemoteDesktopWidget
+        ax = rdp.getAxWidget()
+        rdp.releaseControl()
+        self.assertTrue(ax.cleared)
+        self.assertTrue(deleteNow(rdp))
 
     def test_released_when_application_quits(self):
         """
