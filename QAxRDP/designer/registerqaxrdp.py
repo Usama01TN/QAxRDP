@@ -14,7 +14,7 @@ def addVirtualEnvSitePackages():
     Designer's embedded Python does not always see the packages of the virtual environment it was started from
     (it replaces PYTHONPATH and may ignore VIRTUAL_ENV): add its site-packages so PySide6, ManyQt and QAxRDP
     can be imported.
-    :return:
+    :return: None
     """
     from sys import path, platform, version_info
     from os.path import join, isdir

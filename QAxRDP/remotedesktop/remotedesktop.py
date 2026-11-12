@@ -11,7 +11,7 @@ Ported from QAxRemoteDesktop (QAxRDP 1.x) to plain Qt logic on top of ManyQt:
       widget stays usable (painted placeholder) on platforms without ActiveX support.
 The control itself only exists on Windows with a Qt binding that ships the QAxContainer module.
 """
-from ManyQt.QtCore import Qt, QSize, QRectF, QPointF, pyqtSignal, pyqtSlot, pyqtProperty, QObject
+from ManyQt.QtCore import Qt, QSize, QRectF, QPointF, pyqtSignal, pyqtSlot, pyqtProperty, QObject, QCoreApplication
 from ManyQt.QtGui import QPainter, QColor, QPen, QBrush, QPainterPath, QFont, QFontMetrics
 from ManyQt.QtWidgets import QWidget, QVBoxLayout, QApplication
 from os.path import dirname
@@ -365,6 +365,10 @@ class RemoteDesktopWidget(QWidget):
         # Control.
         if self.__m_autoCreateControl:
             self._createControl()
+        # Release the ActiveX control while Qt still runs, not in arbitrary order when the interpreter exits.
+        app = QCoreApplication.instance()  # type: QCoreApplication | None
+        if app is not None:
+            app.aboutToQuit.connect(self.releaseControl)
         # Options given to the constructor (None = keep the control default).
         options = (('server', server), ('port', port), ('domain', domain), ('userName', userName),
                    ('password', password), ('colorDepth', colorDepth), ('desktopWidth', desktopWidth),
@@ -597,6 +601,17 @@ class RemoteDesktopWidget(QWidget):
         :return: bool
         """
         return self._createControl()
+
+    @pyqtSlot()
+    def releaseControl(self):
+        """
+        Disconnects the session and releases the ActiveX control now (recreateControl() creates it again, with the
+        cached settings). Called automatically when the application is about to quit, so that the COM control is
+        released while Qt still runs instead of in arbitrary order when the interpreter exits.
+        :return:
+        """
+        self._destroyControl()
+        self.update()
 
     def getControlVersion(self):
         """

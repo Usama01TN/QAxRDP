@@ -229,6 +229,7 @@ rdp.saveScreenshot('session.png')          # grabs the native window, ActiveX co
 rdp.updateSessionDisplaySettings(1920, 1080)
 rdp.setControlVersion(10)                  # recreates the control, settings are reapplied
 rdp.getAxWidget()                          # the underlying QAxWidget for direct QAxBase calls
+rdp.releaseControl()                       # release the control now (automatic when the application quits)
 ```
 
 ## Qt Designer:
@@ -368,7 +369,7 @@ or by hand: **Actions > Release > Run workflow** (or `gh workflow run release.ym
 1. Set `__version__` in `QAxRDP/version.py` and add a `## <version> - <date>` section to `CHANGELOG.md`: it becomes
    the release notes, and the workflow refuses to release without it.
 2. Push. The workflow checks the version and the changelog, runs the tests (PyQt5 on Python 3.10, 3.12 and 3.13,
-   PySide6 on 3.12, and Windows with the ActiveX control for information), builds the sdist and the wheel, checks
+   PySide6 on 3.12, and Windows with the real ActiveX control), builds the sdist and the wheel, checks
    them with `twine check --strict` and installs the wheel in a clean environment.
 3. Only then it publishes on PyPI and creates the GitHub release **v<version>** with the distributions attached. The
    release and its tag are forced: an existing `v<version>` is deleted and recreated on the current commit.

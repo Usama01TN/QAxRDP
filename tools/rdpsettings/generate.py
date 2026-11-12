@@ -49,7 +49,9 @@ ALL = [CONTROL] + INTERFACES
 
 
 def pyName(ax):
-    """camelCase python name of an ActiveX property."""
+    """
+    camelCase python name of an ActiveX property.
+    """
     if ax.startswith('Is') and ax[2].isupper():
         ax = ax[2:]
     i = 0

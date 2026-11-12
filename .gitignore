@@ -4,10 +4,10 @@ __pycache__/
 .eggs/
 build/
 dist/
-.idea/
 .ruff_cache/
+.idea/
 .vscode/
 .venv/
 venv/
-*.png
-!docs/**/*.png
+# Screenshots written by the smoke tests (never ignore *.png: the package ships icons).
+*_shot.png

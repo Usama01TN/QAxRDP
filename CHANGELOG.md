@@ -22,6 +22,9 @@
 - Release workflow (`.github/workflows/release.yml`): checks the version and this changelog, runs the tests (PyQt5 on
   Python 3.10 / 3.12 / 3.13, PySide6, and Windows with the ActiveX control), builds and checks the distributions, then
   publishes them on PyPI and in the GitHub release `v<version>` (forced: an existing release and tag are recreated).
+- `RemoteDesktopWidget.releaseControl()`: disconnects and releases the ActiveX control; it is called automatically
+  when the application is about to quit, so the COM control is released while Qt still runs (an application could
+  otherwise exit with an error code when the interpreter destroyed the control after Qt).
 - PyPI project links (source, issues, releases, changelog), and README links and images made absolute for PyPI when
   built by the workflow.
 

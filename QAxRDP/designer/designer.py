@@ -19,7 +19,6 @@ DESIGNER_COMMANDS = {
     'pyqt5': (('pyqt5-tools', 'designer'), ('qt5-tools', 'designer'), ('designer-qt5',), ('designer',)),
     'pyqt4': (('designer-qt4',), ('designer',)),
 }  # type: dict[str, tuple[tuple[str]]]
-
 INSTALL_HINTS = {
     'pyside6': 'pip install PySide6 (it ships pyside6-designer with Python plugin support).',
     'pyqt6': 'pip install pyqt6-tools where available, or install Qt Designer with the PyQt6 Designer plugin.',
@@ -27,7 +26,6 @@ INSTALL_HINTS = {
              'Designer plugin from your distribution.',
     'pyqt4': 'install Qt 4 Designer with the PyQt4 Designer plugin.',
 }  # type: dict[str, str]
-
 ENVIRONMENT_VARIABLES = ('PYQTDESIGNERPATH', 'PYSIDE_DESIGNER_PLUGINS')  # type: tuple[str]
 
 

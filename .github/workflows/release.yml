@@ -1,11 +1,9 @@
 # Release QAxRDP: validate -> test -> build -> PyPI -> GitHub release "v<version>".
-#
 # Runs when QAxRDP/version.py changes on main/master, or manually (Actions > Release > Run workflow).
 # The GitHub release and its tag are forced: an existing "v<version>" release/tag is deleted and recreated on the
 # current commit. PyPI never allows replacing a published version: if it is already there, the PyPI job is skipped
 # with a warning and the GitHub release is still (re)made. Nothing is published unless every check passes, and the
 # GitHub release is only made after PyPI succeeded (or was skipped).
-#
 # PyPI authentication (one of them, see README "Releasing"):
 #   - Trusted publishing: a (pending) publisher on PyPI for this repository, workflow "release.yml",
 #     environment "pypi". No secret needed.
@@ -14,8 +12,8 @@ name: Release
 
 on:
   push:
-    branches: [main, master]
-    paths: ['QAxRDP/version.py']
+    branches: [ main, master ]
+    paths: [ 'QAxRDP/version.py' ]
   workflow_dispatch:
     inputs:
       publish_pypi:
@@ -51,6 +49,7 @@ jobs:
           set -euo pipefail
           version="$(python .github/scripts/release.py version)"
           python .github/scripts/release.py notes "$version" > /dev/null
+          python .github/scripts/release.py check-files
           {
             echo "version=$version"
             echo "tag=v$version"
@@ -103,16 +102,26 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install ManyQt "${{ matrix.package }}"
       - name: Run the test suite
-        run: python -m unittest discover -s tests -v
+        shell: bash
+        run: |
+          set +e
+          python -X faulthandler -m unittest discover -s tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
+          code=${PIPESTATUS[0]}
+          set -e
+          if [ "$code" -ne 0 ] && tail -n 3 "$RUNNER_TEMP/tests.log" | grep -q '^OK'; then
+            echo "::error::All tests passed but Python exited with code $code while shutting down (Qt / ActiveX teardown)"
+          fi
+          exit "$code"
+      - name: Application shutdown check (must exit with code 0)
+        shell: bash
+        run: python -X faulthandler .github/scripts/shutdowncheck.py
 
   test-windows:
-    # The only place where the real MsTscAx ActiveX control exists. Informational: a hosted runner may lack the
-    # interactive desktop the control needs, so a failure here is reported but does not block the release.
-    name: Tests on Windows (ActiveX, informational)
+    # The only place where the real MsTscAx ActiveX control exists (test_activex.py runs here, skipped elsewhere).
+    name: Tests on Windows (ActiveX)
     needs: prepare
     runs-on: windows-latest
     timeout-minutes: 20
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -123,11 +132,23 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install ManyQt PyQt5
       - name: Run the test suite (ActiveX tests included)
-        run: python -m unittest discover -s tests -v
+        shell: bash
+        run: |
+          set +e
+          python -X faulthandler -m unittest discover -s tests -v 2>&1 | tee "$RUNNER_TEMP/tests.log"
+          code=${PIPESTATUS[0]}
+          set -e
+          if [ "$code" -ne 0 ] && tail -n 3 "$RUNNER_TEMP/tests.log" | grep -q '^OK'; then
+            echo "::error::All tests passed but Python exited with code $code while shutting down (Qt / ActiveX teardown)"
+          fi
+          exit "$code"
+      - name: Application shutdown check (must exit with code 0)
+        shell: bash
+        run: python -X faulthandler .github/scripts/shutdowncheck.py
 
   build:
     name: Build and check distributions
-    needs: [prepare, test]
+    needs: [ prepare, test, test-windows ]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -169,7 +190,7 @@ jobs:
 
   pypi:
     name: Publish on PyPI
-    needs: [prepare, build]
+    needs: [ prepare, build ]
     if: needs.prepare.outputs.on_pypi == 'false' && (github.event_name != 'workflow_dispatch' || inputs.publish_pypi)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -193,7 +214,7 @@ jobs:
 
   github-release:
     name: GitHub release ${{ needs.prepare.outputs.tag }}
-    needs: [prepare, build, pypi]
+    needs: [ prepare, build, pypi ]
     if: ${{ !cancelled() && needs.build.result == 'success' && (needs.pypi.result == 'success' || needs.pypi.result == 'skipped') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10

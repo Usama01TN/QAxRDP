@@ -1,7 +1,6 @@
 # coding=utf-8
 """
 designer package: Qt Designer plugins of the QAxRDP widgets.
-
     - qaxrdpplugin.py: plugin module for PyQt (PYQTDESIGNERPATH).
     - registerqaxrdp.py: registration script for PySide6 (PYSIDE_DESIGNER_PLUGINS).
     - designer.py: launcher (qaxrdp-designer) and environment helpers, without any Qt import.

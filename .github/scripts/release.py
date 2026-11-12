@@ -18,8 +18,7 @@ from io import open
 
 ROOT = dirname(dirname(dirname(abspath(__file__))))  # type: str
 #: Canonical public PEP 440 versions (what setuptools writes in file names): 2.1.0, 2.1.0rc1, 2.1.0.post1...
-VERSION_PATTERN = regex(
-    r'^(0|[1-9]\d*)(\.(0|[1-9]\d*))*((a|b|rc)(0|[1-9]\d*))?(\.post(0|[1-9]\d*))?(\.dev(0|[1-9]\d*))?$')
+VERSION_PATTERN = regex(r'^(0|[1-9]\d*)(\.(0|[1-9]\d*))*((a|b|rc)(0|[1-9]\d*))?(\.post(0|[1-9]\d*))?(\.dev(0|[1-9]\d*))?$')
 PRERELEASE_PATTERN = regex(r'(a|b|rc|\.dev)\d+')
 DISTRIBUTION = 'qaxrdp'  # type: str  # Normalized project name used in distribution file names.
 PACKAGE_DATA = ('images/logo.png', 'designer/images/remotedesktopwidget.png', 'designer/images/connectionbar.png',
@@ -89,6 +88,18 @@ def notes(value):
     return text
 
 
+def checkFiles():
+    """
+    In CI the checkout only holds committed files: a package data file missing here was never committed.
+    :return:
+    """
+    missing = [name for name in PACKAGE_DATA if not isfile(join(ROOT, 'QAxRDP', *name.split('/')))]
+    if missing:
+        fail('Not in the repository: {}. Commit them (are they excluded by .gitignore?)'.format(
+            ', '.join('QAxRDP/' + name for name in missing)))
+    print('Package data files OK: {}'.format(len(PACKAGE_DATA)))
+
+
 def checkDist(value, folder):
     """
     :param value: (str) Version.
@@ -149,6 +160,8 @@ def main(args):
         stdout.write(('true' if isPrerelease(rest[0]) else 'false') + '\n')
     elif command == 'notes':
         stdout.write(notes(rest[0]) + '\n')
+    elif command == 'check-files':
+        checkFiles()
     elif command == 'check-dist':
         checkDist(rest[0], rest[1])
     elif command == 'check-install':

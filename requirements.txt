@@ -2,4 +2,3 @@
 ManyQt
 # ...and at least one Qt binding. PyQt5 is ManyQt's default; its Windows wheels include QAxContainer.
 # Select another binding with the QT_API environment variable (pyqt6, pyside2, pyside6...).
-PyQt5
