@@ -1,0 +1,6 @@
+include README.md CHANGELOG.md LICENSE requirements.txt pyproject.toml
+recursive-include docs *.md *.html *.png *.svg
+recursive-include QAxRDP *.png
+recursive-include tests *.py
+recursive-include tools *.py *.tpl
+global-exclude __pycache__ *.py[cod]

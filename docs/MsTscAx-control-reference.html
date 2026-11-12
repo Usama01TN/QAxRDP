@@ -1,0 +1,1848 @@
+<h1 align=center>Microsoft RDP Client Control (redistributable) - version 11 Reference</h1>
+<p>The Microsoft RDP Client Control (redistributable) - version 11 COM object is a QAxWidget with the CLSID
+    {c0efa91a-eeb7-41c7-97fa-f0ed645efb24}.</p>
+<h3>Interfaces</h3>
+<ul>
+    <li>IMsRdpClient10
+</ul>
+<h3>Event Interfaces</h3>
+<ul>
+    <li>IMsTscAxEvents
+    <li>IPropertyNotifySink
+</ul>
+<h2>Public Slots:</h2>
+<ul>
+    <li>void <a href="#Connect"><b>Connect</b></a>();</li>
+    <li>void <a href="#CreateVirtualChannels"><b>CreateVirtualChannels</b></a>(QString newVal);</li>
+    <li>void <a href="#Disconnect"><b>Disconnect</b></a>();</li>
+    <li>QString <a href="#GetErrorDescription"><b>GetErrorDescription</b></a>(uint disconnectReason, uint
+        ExtendedDisconnectReason);
+    </li>
+    <li>QString <a href="#GetStatusText"><b>GetStatusText</b></a>(uint statusCode);</li>
+    <li>int <a href="#GetVirtualChannelOptions"><b>GetVirtualChannelOptions</b></a>(QString chanName);</li>
+    <li>__MIDL_IMsRdpClient8_0001 <a href="#Reconnect"><b>Reconnect</b></a>(uint ulWidth, uint ulHeight);</li>
+    <li>__MIDL_IMsRdpClient_0001 <a href="#RequestClose"><b>RequestClose</b></a>();</li>
+    <li>void <a href="#SendOnVirtualChannel"><b>SendOnVirtualChannel</b></a>(QString chanName, QString ChanData);</li>
+    <li>void <a href="#SendRemoteAction"><b>SendRemoteAction</b></a>(__MIDL___MIDL_itf_mstsax_0000_0000_0004
+        actionType);
+    </li>
+    <li>void <a href="#SetColorDepth"><b>SetColorDepth</b></a>(int ColorDepth);</li>
+    <li>void <a href="#SetConnectedStatusText"><b>SetConnectedStatusText</b></a>(QString ConnectedStatusText);</li>
+    <li>void <a href="#SetConnectingText"><b>SetConnectingText</b></a>(QString ConnectingText);</li>
+    <li>void <a href="#SetDesktopHeight"><b>SetDesktopHeight</b></a>(int DesktopHeight);</li>
+    <li>void <a href="#SetDesktopWidth"><b>SetDesktopWidth</b></a>(int DesktopWidth);</li>
+    <li>void <a href="#SetDisconnectedText"><b>SetDisconnectedText</b></a>(QString DisconnectedText);</li>
+    <li>void <a href="#SetDomain"><b>SetDomain</b></a>(QString Domain);</li>
+    <li>void <a href="#SetFullScreen"><b>SetFullScreen</b></a>(bool FullScreen);</li>
+    <li>void <a href="#SetFullScreenTitle"><b>SetFullScreenTitle</b></a>(QString FullScreenTitle);</li>
+    <li>void <a href="#SetServer"><b>SetServer</b></a>(QString Server);</li>
+    <li>void <a href="#SetStartConnected"><b>SetStartConnected</b></a>(int StartConnected);</li>
+    <li>void <a href="#SetUserName"><b>SetUserName</b></a>(QString UserName);</li>
+    <li>void <a href="#SetVirtualChannelOptions"><b>SetVirtualChannelOptions</b></a>(QString chanName, int chanOptions);
+    </li>
+    <li>void <a href="#SyncSessionDisplaySettings"><b>SyncSessionDisplaySettings</b></a>();</li>
+    <li>void <a href="#UpdateSessionDisplaySettings"><b>UpdateSessionDisplaySettings</b></a>(uint ulDesktopWidth, uint
+        ulDesktopHeight, uint ulPhysicalWidth, uint ulPhysicalHeight, uint ulOrientation, uint ulDesktopScaleFactor,
+        uint ulDeviceScaleFactor);
+    </li>
+    <li>void <a href="#attachEvent"><b>attachEvent</b></a>(QString eventName, IDispatch* callback);</li>
+    <li>void <a href="#detachEvent"><b>detachEvent</b></a>(QString eventName, IDispatch* callback);</li>
+</ul>
+<h2>Signals:</h2>
+<ul>
+    <li>void <a href="#OnAuthenticationWarningDismissed"><b>OnAuthenticationWarningDismissed</b></a>();</li>
+    <li>void <a href="#OnAuthenticationWarningDisplayed"><b>OnAuthenticationWarningDisplayed</b></a>();</li>
+    <li>void <a href="#OnAutoReconnected"><b>OnAutoReconnected</b></a>();</li>
+    <li>void <a href="#OnAutoReconnecting"><b>OnAutoReconnecting</b></a>(int disconnectReason, int attemptCount);</li>
+    <li>void <a href="#OnAutoReconnecting2"><b>OnAutoReconnecting2</b></a>(int disconnectReason, bool networkAvailable,
+        int attemptCount, int maxAttemptCount);
+    </li>
+    <li>void <a href="#OnChannelReceivedData"><b>OnChannelReceivedData</b></a>(QString chanName, QString data);</li>
+    <li>void <a href="#OnConfirmClose"><b>OnConfirmClose</b></a>();</li>
+    <li>void <a href="#OnConnected"><b>OnConnected</b></a>();</li>
+    <li>void <a href="#OnConnecting"><b>OnConnecting</b></a>();</li>
+    <li>void <a href="#OnConnectionBarPullDown"><b>OnConnectionBarPullDown</b></a>();</li>
+    <li>void <a href="#OnDevicesButtonPressed"><b>OnDevicesButtonPressed</b></a>();</li>
+    <li>void <a href="#OnDisconnected"><b>OnDisconnected</b></a>(int discReason);</li>
+    <li>void <a href="#OnEnterFullScreenMode"><b>OnEnterFullScreenMode</b></a>();</li>
+    <li>void <a href="#OnFatalError"><b>OnFatalError</b></a>(int errorCode);</li>
+    <li>void <a href="#OnFocusReleased"><b>OnFocusReleased</b></a>(int iDirection);</li>
+    <li>void <a href="#OnIdleTimeoutNotification"><b>OnIdleTimeoutNotification</b></a>();</li>
+    <li>void <a href="#OnLeaveFullScreenMode"><b>OnLeaveFullScreenMode</b></a>();</li>
+    <li>void <a href="#OnLoginComplete"><b>OnLoginComplete</b></a>();</li>
+    <li>void <a href="#OnLogonError"><b>OnLogonError</b></a>(int lError);</li>
+    <li>void <a href="#OnMouseInputModeChanged"><b>OnMouseInputModeChanged</b></a>(bool fMouseModeRelative);</li>
+    <li>void <a href="#OnNetworkStatusChanged"><b>OnNetworkStatusChanged</b></a>(uint qualityLevel, int bandwidth, int
+        rtt);
+    </li>
+    <li>void <a href="#OnReceivedTSPublicKey"><b>OnReceivedTSPublicKey</b></a>(QString publicKey);</li>
+    <li>void <a href="#OnRemoteDesktopSizeChange"><b>OnRemoteDesktopSizeChange</b></a>(int width, int height);</li>
+    <li>void <a href="#OnRemoteProgramDisplayed"><b>OnRemoteProgramDisplayed</b></a>(bool vbDisplayed, uint
+        uDisplayInformation);
+    </li>
+    <li>void <a href="#OnRemoteProgramResult"><b>OnRemoteProgramResult</b></a>(QString bstrRemoteProgram,
+        __MIDL___MIDL_itf_mstsax_0000_0057_0001 lError, bool vbIsExecutable);
+    </li>
+    <li>void <a href="#OnRemoteWindowDisplayed"><b>OnRemoteWindowDisplayed</b></a>(bool vbDisplayed, _RemotableHandle*
+        hwnd, __MIDL___MIDL_itf_mstsax_0000_0057_0002 windowAttribute);
+    </li>
+    <li>void <a href="#OnRequestContainerMinimize"><b>OnRequestContainerMinimize</b></a>();</li>
+    <li>void <a href="#OnRequestGoFullScreen"><b>OnRequestGoFullScreen</b></a>();</li>
+    <li>void <a href="#OnRequestLeaveFullScreen"><b>OnRequestLeaveFullScreen</b></a>();</li>
+    <li>void <a href="#OnServiceMessageReceived"><b>OnServiceMessageReceived</b></a>(QString serviceMessage);</li>
+    <li>void <a href="#OnUserNameAcquired"><b>OnUserNameAcquired</b></a>(QString bstrUserName);</li>
+    <li>void <a href="#OnWarning"><b>OnWarning</b></a>(int warningCode);</li>
+    <li>void <a href="#exception"><b>exception</b></a>(int code, QString source, QString disc, QString help);</li>
+    <li>void <a href="#propertyChanged"><b>propertyChanged</b></a>(QString name);</li>
+    <li>void <a href="#signal"><b>signal</b></a>(QString name, int argc, void* argv);</li>
+</ul>
+<h2>Properties:</h2>
+<ul>
+    <li>QString <a href="#objectName"><b>objectName</b></a>;</li>
+    <li>bool <a href="#modal"><b>modal</b></a>;</li>
+    <li>Qt::WindowModality <a href="#windowModality"><b>windowModality</b></a>;</li>
+    <li>bool <a href="#enabled"><b>enabled</b></a>;</li>
+    <li>QRect <a href="#geometry"><b>geometry</b></a>;</li>
+    <li>QRect <a href="#frameGeometry"><b>frameGeometry</b></a>;</li>
+    <li>QRect <a href="#normalGeometry"><b>normalGeometry</b></a>;</li>
+    <li>int <a href="#x"><b>x</b></a>;</li>
+    <li>int <a href="#y"><b>y</b></a>;</li>
+    <li>QPoint <a href="#pos"><b>pos</b></a>;</li>
+    <li>QSize <a href="#frameSize"><b>frameSize</b></a>;</li>
+    <li>QSize <a href="#size"><b>size</b></a>;</li>
+    <li>int <a href="#width"><b>width</b></a>;</li>
+    <li>int <a href="#height"><b>height</b></a>;</li>
+    <li>QRect <a href="#rect"><b>rect</b></a>;</li>
+    <li>QRect <a href="#childrenRect"><b>childrenRect</b></a>;</li>
+    <li>QRegion <a href="#childrenRegion"><b>childrenRegion</b></a>;</li>
+    <li>QSizePolicy <a href="#sizePolicy"><b>sizePolicy</b></a>;</li>
+    <li>QSize <a href="#minimumSize"><b>minimumSize</b></a>;</li>
+    <li>QSize <a href="#maximumSize"><b>maximumSize</b></a>;</li>
+    <li>int <a href="#minimumWidth"><b>minimumWidth</b></a>;</li>
+    <li>int <a href="#minimumHeight"><b>minimumHeight</b></a>;</li>
+    <li>int <a href="#maximumWidth"><b>maximumWidth</b></a>;</li>
+    <li>int <a href="#maximumHeight"><b>maximumHeight</b></a>;</li>
+    <li>QSize <a href="#sizeIncrement"><b>sizeIncrement</b></a>;</li>
+    <li>QSize <a href="#baseSize"><b>baseSize</b></a>;</li>
+    <li>QPalette <a href="#palette"><b>palette</b></a>;</li>
+    <li>QFont <a href="#font"><b>font</b></a>;</li>
+    <li>QCursor <a href="#cursor"><b>cursor</b></a>;</li>
+    <li>bool <a href="#mouseTracking"><b>mouseTracking</b></a>;</li>
+    <li>bool <a href="#tabletTracking"><b>tabletTracking</b></a>;</li>
+    <li>bool <a href="#isActiveWindow"><b>isActiveWindow</b></a>;</li>
+    <li>Qt::FocusPolicy <a href="#focusPolicy"><b>focusPolicy</b></a>;</li>
+    <li>bool <a href="#focus"><b>focus</b></a>;</li>
+    <li>Qt::ContextMenuPolicy <a href="#contextMenuPolicy"><b>contextMenuPolicy</b></a>;</li>
+    <li>bool <a href="#updatesEnabled"><b>updatesEnabled</b></a>;</li>
+    <li>bool <a href="#visible"><b>visible</b></a>;</li>
+    <li>bool <a href="#minimized"><b>minimized</b></a>;</li>
+    <li>bool <a href="#maximized"><b>maximized</b></a>;</li>
+    <li>bool <a href="#fullScreen"><b>fullScreen</b></a>;</li>
+    <li>QSize <a href="#sizeHint"><b>sizeHint</b></a>;</li>
+    <li>QSize <a href="#minimumSizeHint"><b>minimumSizeHint</b></a>;</li>
+    <li>bool <a href="#acceptDrops"><b>acceptDrops</b></a>;</li>
+    <li>QString <a href="#windowTitle"><b>windowTitle</b></a>;</li>
+    <li>QIcon <a href="#windowIcon"><b>windowIcon</b></a>;</li>
+    <li>QString <a href="#windowIconText"><b>windowIconText</b></a>;</li>
+    <li>double <a href="#windowOpacity"><b>windowOpacity</b></a>;</li>
+    <li>bool <a href="#windowModified"><b>windowModified</b></a>;</li>
+    <li>QString <a href="#toolTip"><b>toolTip</b></a>;</li>
+    <li>int <a href="#toolTipDuration"><b>toolTipDuration</b></a>;</li>
+    <li>QString <a href="#statusTip"><b>statusTip</b></a>;</li>
+    <li>QString <a href="#whatsThis"><b>whatsThis</b></a>;</li>
+    <li>QString <a href="#accessibleName"><b>accessibleName</b></a>;</li>
+    <li>QString <a href="#accessibleDescription"><b>accessibleDescription</b></a>;</li>
+    <li>Qt::LayoutDirection <a href="#layoutDirection"><b>layoutDirection</b></a>;</li>
+    <li>bool <a href="#autoFillBackground"><b>autoFillBackground</b></a>;</li>
+    <li>QString <a href="#styleSheet"><b>styleSheet</b></a>;</li>
+    <li>QLocale <a href="#locale"><b>locale</b></a>;</li>
+    <li>QString <a href="#windowFilePath"><b>windowFilePath</b></a>;</li>
+    <li>Qt::InputMethodHints <a href="#inputMethodHints"><b>inputMethodHints</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings"><b>AdvancedSettings</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings2"><b>AdvancedSettings2</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings3"><b>AdvancedSettings3</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings4"><b>AdvancedSettings4</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings5"><b>AdvancedSettings5</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings6"><b>AdvancedSettings6</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings7"><b>AdvancedSettings7</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings8"><b>AdvancedSettings8</b></a>;</li>
+    <li>IDispatch* <a href="#AdvancedSettings9"><b>AdvancedSettings9</b></a>;</li>
+    <li>int <a href="#CipherStrength"><b>CipherStrength</b></a>;</li>
+    <li>int <a href="#ColorDepth"><b>ColorDepth</b></a>;</li>
+    <li>int <a href="#Connected"><b>Connected</b></a>;</li>
+    <li>QString <a href="#ConnectedStatusText"><b>ConnectedStatusText</b></a>;</li>
+    <li>QString <a href="#ConnectingText"><b>ConnectingText</b></a>;</li>
+    <li>IDispatch* <a href="#Debugger"><b>Debugger</b></a>;</li>
+    <li>int <a href="#DesktopHeight"><b>DesktopHeight</b></a>;</li>
+    <li>int <a href="#DesktopWidth"><b>DesktopWidth</b></a>;</li>
+    <li>QString <a href="#DisconnectedText"><b>DisconnectedText</b></a>;</li>
+    <li>QString <a href="#Domain"><b>Domain</b></a>;</li>
+    <li>__MIDL___MIDL_itf_mstsax_0000_0000_0001 <a href="#ExtendedDisconnectReason"><b>ExtendedDisconnectReason</b></a>;
+    </li>
+    <li>bool <a href="#FullScreen"><b>FullScreen</b></a>;</li>
+    <li>QString <a href="#FullScreenTitle"><b>FullScreenTitle</b></a>;</li>
+    <li>int <a href="#HorizontalScrollBarVisible"><b>HorizontalScrollBarVisible</b></a>;</li>
+    <li>IDispatch* <a href="#MsRdpClientShell"><b>MsRdpClientShell</b></a>;</li>
+    <li>IDispatch* <a href="#RemoteProgram"><b>RemoteProgram</b></a>;</li>
+    <li>IDispatch* <a href="#RemoteProgram2"><b>RemoteProgram2</b></a>;</li>
+    <li>IDispatch* <a href="#RemoteProgram3"><b>RemoteProgram3</b></a>;</li>
+    <li>IDispatch* <a href="#SecuredSettings"><b>SecuredSettings</b></a>;</li>
+    <li>IDispatch* <a href="#SecuredSettings2"><b>SecuredSettings2</b></a>;</li>
+    <li>IDispatch* <a href="#SecuredSettings3"><b>SecuredSettings3</b></a>;</li>
+    <li>int <a href="#SecuredSettingsEnabled"><b>SecuredSettingsEnabled</b></a>;</li>
+    <li>QString <a href="#Server"><b>Server</b></a>;</li>
+    <li>int <a href="#StartConnected"><b>StartConnected</b></a>;</li>
+    <li>IDispatch* <a href="#TransportSettings"><b>TransportSettings</b></a>;</li>
+    <li>IDispatch* <a href="#TransportSettings2"><b>TransportSettings2</b></a>;</li>
+    <li>IDispatch* <a href="#TransportSettings3"><b>TransportSettings3</b></a>;</li>
+    <li>IDispatch* <a href="#TransportSettings4"><b>TransportSettings4</b></a>;</li>
+    <li>QString <a href="#UserName"><b>UserName</b></a>;</li>
+    <li>QString <a href="#Version"><b>Version</b></a>;</li>
+    <li>int <a href="#VerticalScrollBarVisible"><b>VerticalScrollBarVisible</b></a>;</li>
+    <li>QString <a href="#control"><b>control</b></a>;</li>
+</ul>
+<hr><h2>Member Type Documentation</h2>
+<h3><a name=__MIDL_IMsRdpClient8_0001></a>__MIDL_IMsRdpClient8_0001</h3>
+<ul>
+    <li>controlReconnectStarted =0</li>
+    <li>controlReconnectBlocked =1</li>
+</ul>
+<h3><a name=__MIDL_IMsRdpClientNonScriptable4_0001></a>__MIDL_IMsRdpClientNonScriptable4_0001</h3>
+<ul>
+    <li>RedirectionWarningTypeDefault =0</li>
+    <li>RedirectionWarningTypeUnsigned =1</li>
+    <li>RedirectionWarningTypeUnknown =2</li>
+    <li>RedirectionWarningTypeUser =3</li>
+    <li>RedirectionWarningTypeThirdPartySigned =4</li>
+    <li>RedirectionWarningTypeTrusted =5</li>
+    <li>RedirectionWarningTypeMax =5</li>
+</ul>
+<h3><a name=__MIDL_IMsRdpClient_0001></a>__MIDL_IMsRdpClient_0001</h3>
+<ul>
+    <li>controlCloseCanProceed =0</li>
+    <li>controlCloseWaitForEvents =1</li>
+</ul>
+<h3><a name=__MIDL_IRemoteDesktopClientActions_0001></a>__MIDL_IRemoteDesktopClientActions_0001</h3>
+<ul>
+    <li>RemoteActionCharms =0</li>
+    <li>RemoteActionAppbar =1</li>
+    <li>RemoteActionSnap =2</li>
+    <li>RemoteActionStartScreen =3</li>
+    <li>RemoteActionAppSwitch =4</li>
+</ul>
+<h3><a name=__MIDL_IRemoteDesktopClientActions_0002></a>__MIDL_IRemoteDesktopClientActions_0002</h3>
+<ul>
+    <li>SnapshotEncodingDataUri =0</li>
+</ul>
+<h3><a name=__MIDL_IRemoteDesktopClientActions_0003></a>__MIDL_IRemoteDesktopClientActions_0003</h3>
+<ul>
+    <li>SnapshotFormatPng =0</li>
+    <li>SnapshotFormatJpeg =1</li>
+    <li>SnapshotFormatBmp =2</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0000_0001></a>__MIDL___MIDL_itf_mstsax_0000_0000_0001</h3>
+<ul>
+    <li>exDiscReasonNoInfo =0</li>
+    <li>exDiscReasonAPIInitiatedDisconnect =1</li>
+    <li>exDiscReasonAPIInitiatedLogoff =2</li>
+    <li>exDiscReasonServerIdleTimeout =3</li>
+    <li>exDiscReasonServerLogonTimeout =4</li>
+    <li>exDiscReasonReplacedByOtherConnection =5</li>
+    <li>exDiscReasonOutOfMemory =6</li>
+    <li>exDiscReasonServerDeniedConnection =7</li>
+    <li>exDiscReasonServerDeniedConnectionFips =8</li>
+    <li>exDiscReasonServerInsufficientPrivileges =9</li>
+    <li>exDiscReasonServerFreshCredsRequired =10</li>
+    <li>exDiscReasonRpcInitiatedDisconnectByUser =11</li>
+    <li>exDiscReasonLogoffByUser =12</li>
+    <li>exDiscReasonLicenseInternal =256</li>
+    <li>exDiscReasonLicenseNoLicenseServer =257</li>
+    <li>exDiscReasonLicenseNoLicense =258</li>
+    <li>exDiscReasonLicenseErrClientMsg =259</li>
+    <li>exDiscReasonLicenseHwidDoesntMatchLicense =260</li>
+    <li>exDiscReasonLicenseErrClientLicense =261</li>
+    <li>exDiscReasonLicenseCantFinishProtocol =262</li>
+    <li>exDiscReasonLicenseClientEndedProtocol =263</li>
+    <li>exDiscReasonLicenseErrClientEncryption =264</li>
+    <li>exDiscReasonLicenseCantUpgradeLicense =265</li>
+    <li>exDiscReasonLicenseNoRemoteConnections =266</li>
+    <li>exDiscReasonLicenseCreatingLicStoreAccDenied =267</li>
+    <li>exDiscReasonRdpEncInvalidCredentials =768</li>
+    <li>exDiscReasonProtocolRangeStart =4096</li>
+    <li>exDiscReasonProtocolRangeEnd =32767</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0000_0003></a>__MIDL___MIDL_itf_mstsax_0000_0000_0003</h3>
+<ul>
+    <li>FullMode =0</li>
+    <li>ThinClientMode =1</li>
+    <li>SmallCacheMode =2</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0000_0004></a>__MIDL___MIDL_itf_mstsax_0000_0000_0004</h3>
+<ul>
+    <li>RemoteSessionActionCharms =0</li>
+    <li>RemoteSessionActionAppbar =1</li>
+    <li>RemoteSessionActionSnap =2</li>
+    <li>RemoteSessionActionStartScreen =3</li>
+    <li>RemoteSessionActionAppSwitch =4</li>
+    <li>RemoteSessionActionActionCenter =5</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0008_0001></a>__MIDL___MIDL_itf_mstsax_0000_0008_0001</h3>
+<ul>
+    <li>encodingQualityLow =0</li>
+    <li>encodingQualityMedium =1</li>
+    <li>encodingQualityHigh =2</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0043_0001></a>__MIDL___MIDL_itf_mstsax_0000_0043_0001</h3>
+<ul>
+    <li>autoReconnectContinueAutomatic =0</li>
+    <li>autoReconnectContinueStop =1</li>
+    <li>autoReconnectContinueManual =2</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0057_0001></a>__MIDL___MIDL_itf_mstsax_0000_0057_0001</h3>
+<ul>
+    <li>remoteAppResultOk =0</li>
+    <li>remoteAppResultLocked =1</li>
+    <li>remoteAppResultProtocolError =2</li>
+    <li>remoteAppResultNotInWhitelist =3</li>
+    <li>remoteAppResultNetworkPathDenied =4</li>
+    <li>remoteAppResultFileNotFound =5</li>
+    <li>remoteAppResultFailure =6</li>
+    <li>remoteAppResultHookNotLoaded =7</li>
+</ul>
+<h3><a name=__MIDL___MIDL_itf_mstsax_0000_0057_0002></a>__MIDL___MIDL_itf_mstsax_0000_0057_0002</h3>
+<ul>
+    <li>remoteAppWindowNone =0</li>
+    <li>remoteAppWindowDisplayed =1</li>
+    <li>remoteAppShellIconDisplayed =2</li>
+</ul>
+<hr><h2>Member Function Documentation</h2>
+<h3><a name=Connect></a>void Connect ()<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(Connect()));</pre>
+<p>Or call the function directly:
+<pre>
+	object->dynamicCall("Connect()");</pre>
+
+<h3><a name=CreateVirtualChannels></a>void CreateVirtualChannels (QString newVal)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(CreateVirtualChannels(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("CreateVirtualChannels(QString)", params);</pre>
+
+<h3><a name=Disconnect></a>void Disconnect ()<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(Disconnect()));</pre>
+<p>Or call the function directly:
+<pre>
+	object->dynamicCall("Disconnect()");</pre>
+
+<h3><a name=GetErrorDescription></a>QString GetErrorDescription (uint disconnectReason, uint
+    ExtendedDisconnectReason)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(uint, uint)), object, SLOT(GetErrorDescription(uint, uint)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	QString result = object->dynamicCall("GetErrorDescription(uint, uint)", params).toString();</pre>
+
+<h3><a name=GetStatusText></a>QString GetStatusText (uint statusCode)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(uint)), object, SLOT(GetStatusText(uint)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	QString result = object->dynamicCall("GetStatusText(uint)", params).toString();</pre>
+
+<h3><a name=GetVirtualChannelOptions></a>int GetVirtualChannelOptions (QString chanName)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(GetVirtualChannelOptions(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	int result = object->dynamicCall("GetVirtualChannelOptions(QString)", params).toInt();</pre>
+
+<h3><a name=Reconnect></a>__MIDL_IMsRdpClient8_0001 Reconnect (uint ulWidth, uint ulHeight)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(uint, uint)), object, SLOT(Reconnect(uint, uint)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	__MIDL_IMsRdpClient8_0001 result = object->dynamicCall("Reconnect(uint, uint)", params).toInt();</pre>
+
+<h3><a name=RequestClose></a>__MIDL_IMsRdpClient_0001 RequestClose ()<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(RequestClose()));</pre>
+<p>Or call the function directly:
+<pre>
+	__MIDL_IMsRdpClient_0001 result = object->dynamicCall("RequestClose()").toInt();</pre>
+
+<h3><a name=SendOnVirtualChannel></a>void SendOnVirtualChannel (QString chanName, QString ChanData)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString, QString)), object, SLOT(SendOnVirtualChannel(QString, QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SendOnVirtualChannel(QString, QString)", params);</pre>
+
+<h3><a name=SendRemoteAction></a>void SendRemoteAction (__MIDL___MIDL_itf_mstsax_0000_0000_0004 actionType)<tt>
+    [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(__MIDL___MIDL_itf_mstsax_0000_0000_0004)), object, SLOT(SendRemoteAction(__MIDL___MIDL_itf_mstsax_0000_0000_0004)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SendRemoteAction(__MIDL___MIDL_itf_mstsax_0000_0000_0004)", params);</pre>
+
+<h3><a name=SetColorDepth></a>void SetColorDepth (int ColorDepth)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int)), object, SLOT(SetColorDepth(int)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetColorDepth(int)", params);</pre>
+
+<h3><a name=SetConnectedStatusText></a>void SetConnectedStatusText (QString ConnectedStatusText)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetConnectedStatusText(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetConnectedStatusText(QString)", params);</pre>
+
+<h3><a name=SetConnectingText></a>void SetConnectingText (QString ConnectingText)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetConnectingText(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetConnectingText(QString)", params);</pre>
+
+<h3><a name=SetDesktopHeight></a>void SetDesktopHeight (int DesktopHeight)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int)), object, SLOT(SetDesktopHeight(int)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetDesktopHeight(int)", params);</pre>
+
+<h3><a name=SetDesktopWidth></a>void SetDesktopWidth (int DesktopWidth)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int)), object, SLOT(SetDesktopWidth(int)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetDesktopWidth(int)", params);</pre>
+
+<h3><a name=SetDisconnectedText></a>void SetDisconnectedText (QString DisconnectedText)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetDisconnectedText(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetDisconnectedText(QString)", params);</pre>
+
+<h3><a name=SetDomain></a>void SetDomain (QString Domain)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetDomain(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetDomain(QString)", params);</pre>
+
+<h3><a name=SetFullScreen></a>void SetFullScreen (bool FullScreen)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(bool)), object, SLOT(SetFullScreen(bool)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetFullScreen(bool)", params);</pre>
+
+<h3><a name=SetFullScreenTitle></a>void SetFullScreenTitle (QString FullScreenTitle)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetFullScreenTitle(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetFullScreenTitle(QString)", params);</pre>
+
+<h3><a name=SetServer></a>void SetServer (QString Server)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetServer(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetServer(QString)", params);</pre>
+
+<h3><a name=SetStartConnected></a>void SetStartConnected (int StartConnected)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int)), object, SLOT(SetStartConnected(int)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetStartConnected(int)", params);</pre>
+
+<h3><a name=SetUserName></a>void SetUserName (QString UserName)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(SetUserName(QString)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetUserName(QString)", params);</pre>
+
+<h3><a name=SetVirtualChannelOptions></a>void SetVirtualChannelOptions (QString chanName, int chanOptions)<tt>
+    [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString, int)), object, SLOT(SetVirtualChannelOptions(QString, int)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("SetVirtualChannelOptions(QString, int)", params);</pre>
+
+<h3><a name=SyncSessionDisplaySettings></a>void SyncSessionDisplaySettings ()<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(SyncSessionDisplaySettings()));</pre>
+<p>Or call the function directly:
+<pre>
+	object->dynamicCall("SyncSessionDisplaySettings()");</pre>
+
+<h3><a name=UpdateSessionDisplaySettings></a>void UpdateSessionDisplaySettings (uint ulDesktopWidth, uint
+    ulDesktopHeight, uint ulPhysicalWidth, uint ulPhysicalHeight, uint ulOrientation, uint ulDesktopScaleFactor, uint
+    ulDeviceScaleFactor)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(uint, uint, uint, uint, uint, uint, uint)), object, SLOT(UpdateSessionDisplaySettings(uint, uint, uint, uint, uint, uint, uint)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("UpdateSessionDisplaySettings(uint, uint, uint, uint, uint, uint, uint)", params);</pre>
+
+<h3><a name=attachEvent></a>void attachEvent (QString eventName, IDispatch* callback)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString, IDispatch*)), object, SLOT(attachEvent(QString, IDispatch*)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("attachEvent(QString, IDispatch*)", params);</pre>
+
+<h3><a name=detachEvent></a>void detachEvent (QString eventName, IDispatch* callback)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:
+<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString, IDispatch*)), object, SLOT(detachEvent(QString, IDispatch*)));</pre>
+<p>Or call the function directly:
+<pre>
+	QVariantList params = ...
+	object->dynamicCall("detachEvent(QString, IDispatch*)", params);</pre>
+
+<h3><a name=OnAuthenticationWarningDismissed></a>void OnAuthenticationWarningDismissed ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnAuthenticationWarningDismissed()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnAuthenticationWarningDisplayed></a>void OnAuthenticationWarningDisplayed ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnAuthenticationWarningDisplayed()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnAutoReconnected></a>void OnAutoReconnected ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnAutoReconnected()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnAutoReconnecting></a>void OnAutoReconnecting (int disconnectReason, int attemptCount)<tt> [signal]</tt>
+</h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnAutoReconnecting(int, int)), receiver, SLOT(someSlot(int, int)));</pre>
+
+<h3><a name=OnAutoReconnecting2></a>void OnAutoReconnecting2 (int disconnectReason, bool networkAvailable, int
+    attemptCount, int maxAttemptCount)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnAutoReconnecting2(int, bool, int, int)), receiver, SLOT(someSlot(int, bool, int, int)));</pre>
+
+<h3><a name=OnChannelReceivedData></a>void OnChannelReceivedData (QString chanName, QString data)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnChannelReceivedData(QString, QString)), receiver, SLOT(someSlot(QString, QString)));</pre>
+
+<h3><a name=OnConfirmClose></a>void OnConfirmClose ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnConfirmClose()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnConnected></a>void OnConnected ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnConnected()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnConnecting></a>void OnConnecting ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnConnecting()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnConnectionBarPullDown></a>void OnConnectionBarPullDown ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnConnectionBarPullDown()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnDevicesButtonPressed></a>void OnDevicesButtonPressed ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnDevicesButtonPressed()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnDisconnected></a>void OnDisconnected (int discReason)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnDisconnected(int)), receiver, SLOT(someSlot(int)));</pre>
+
+<h3><a name=OnEnterFullScreenMode></a>void OnEnterFullScreenMode ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnEnterFullScreenMode()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnFatalError></a>void OnFatalError (int errorCode)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnFatalError(int)), receiver, SLOT(someSlot(int)));</pre>
+
+<h3><a name=OnFocusReleased></a>void OnFocusReleased (int iDirection)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnFocusReleased(int)), receiver, SLOT(someSlot(int)));</pre>
+
+<h3><a name=OnIdleTimeoutNotification></a>void OnIdleTimeoutNotification ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnIdleTimeoutNotification()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnLeaveFullScreenMode></a>void OnLeaveFullScreenMode ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnLeaveFullScreenMode()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnLoginComplete></a>void OnLoginComplete ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnLoginComplete()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnLogonError></a>void OnLogonError (int lError)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnLogonError(int)), receiver, SLOT(someSlot(int)));</pre>
+
+<h3><a name=OnMouseInputModeChanged></a>void OnMouseInputModeChanged (bool fMouseModeRelative)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnMouseInputModeChanged(bool)), receiver, SLOT(someSlot(bool)));</pre>
+
+<h3><a name=OnNetworkStatusChanged></a>void OnNetworkStatusChanged (uint qualityLevel, int bandwidth, int rtt)<tt>
+    [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnNetworkStatusChanged(uint, int, int)), receiver, SLOT(someSlot(uint, int, int)));</pre>
+
+<h3><a name=OnReceivedTSPublicKey></a>void OnReceivedTSPublicKey (QString publicKey)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnReceivedTSPublicKey(QString)), receiver, SLOT(someSlot(QString)));</pre>
+
+<h3><a name=OnRemoteDesktopSizeChange></a>void OnRemoteDesktopSizeChange (int width, int height)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRemoteDesktopSizeChange(int, int)), receiver, SLOT(someSlot(int, int)));</pre>
+
+<h3><a name=OnRemoteProgramDisplayed></a>void OnRemoteProgramDisplayed (bool vbDisplayed, uint uDisplayInformation)<tt>
+    [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRemoteProgramDisplayed(bool, uint)), receiver, SLOT(someSlot(bool, uint)));</pre>
+
+<h3><a name=OnRemoteProgramResult></a>void OnRemoteProgramResult (QString bstrRemoteProgram,
+    __MIDL___MIDL_itf_mstsax_0000_0057_0001 lError, bool vbIsExecutable)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRemoteProgramResult(QString, __MIDL___MIDL_itf_mstsax_0000_0057_0001, bool)), receiver, SLOT(someSlot(QString, __MIDL___MIDL_itf_mstsax_0000_0057_0001, bool)));</pre>
+
+<h3><a name=OnRemoteWindowDisplayed></a>void OnRemoteWindowDisplayed (bool vbDisplayed, _RemotableHandle* hwnd,
+    __MIDL___MIDL_itf_mstsax_0000_0057_0002 windowAttribute)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRemoteWindowDisplayed(bool, _RemotableHandle*, __MIDL___MIDL_itf_mstsax_0000_0057_0002)), receiver, SLOT(someSlot(bool, _RemotableHandle*, __MIDL___MIDL_itf_mstsax_0000_0057_0002)));</pre>
+
+<h3><a name=OnRequestContainerMinimize></a>void OnRequestContainerMinimize ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRequestContainerMinimize()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnRequestGoFullScreen></a>void OnRequestGoFullScreen ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRequestGoFullScreen()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnRequestLeaveFullScreen></a>void OnRequestLeaveFullScreen ()<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnRequestLeaveFullScreen()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnServiceMessageReceived></a>void OnServiceMessageReceived (QString serviceMessage)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnServiceMessageReceived(QString)), receiver, SLOT(someSlot(QString)));</pre>
+
+<h3><a name=OnUserNameAcquired></a>void OnUserNameAcquired (QString bstrUserName)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnUserNameAcquired(QString)), receiver, SLOT(someSlot(QString)));</pre>
+
+<h3><a name=OnWarning></a>void OnWarning (int warningCode)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(OnWarning(int)), receiver, SLOT(someSlot(int)));</pre>
+
+<h3><a name=exception></a>void exception (int code, QString source, QString disc, QString help)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(exception(int, QString, QString, QString)), receiver, SLOT(someSlot(int, QString, QString, QString)));</pre>
+
+<h3><a name=propertyChanged></a>void propertyChanged (QString name)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(propertyChanged(QString)), receiver, SLOT(someSlot(QString)));</pre>
+
+<h3><a name=signal></a>void signal (QString name, int argc, void* argv)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:
+<pre>
+	QObject::connect(object, SIGNAL(signal(QString, int, void*)), receiver, SLOT(someSlot(QString, int, void*)));</pre>
+
+<hr><h2>Property Documentation</h2>
+<h3><a name=objectName></a>QString objectName</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("objectName").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("objectName", newValue);
+</pre>
+Or using the <a href="#setObjectName">setObjectName</a> slot.
+
+<h3><a name=modal></a>bool modal</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("modal").toBool();
+</pre>
+
+<h3><a name=windowModality></a>Qt::WindowModality windowModality</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("windowModality").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ... // string representation of values also supported
+	object->setProperty("windowModality", newValue);
+</pre>
+Or using the <a href="#setWindowModality">setWindowModality</a> slot.
+<p>See also <a href="#Qt::WindowModality">Qt::WindowModality</a>.
+
+<h3><a name=enabled></a>bool enabled</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("enabled").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("enabled", newValue);
+</pre>
+Or using the <a href="#setEnabled">setEnabled</a> slot.
+
+<h3><a name=geometry></a>QRect geometry</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRect val = object->property("geometry").toRect();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QRect newValue = ...
+	object->setProperty("geometry", newValue);
+</pre>
+Or using the <a href="#setGeometry">setGeometry</a> slot.
+
+<h3><a name=frameGeometry></a>QRect frameGeometry</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRect val = object->property("frameGeometry").toRect();
+</pre>
+
+<h3><a name=normalGeometry></a>QRect normalGeometry</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRect val = object->property("normalGeometry").toRect();
+</pre>
+
+<h3><a name=x></a>int x</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("x").toInt();
+</pre>
+
+<h3><a name=y></a>int y</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("y").toInt();
+</pre>
+
+<h3><a name=pos></a>QPoint pos</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QPoint val = object->property("pos").toPoint();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QPoint newValue = ...
+	object->setProperty("pos", newValue);
+</pre>
+Or using the <a href="#setPos">setPos</a> slot.
+
+<h3><a name=frameSize></a>QSize frameSize</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("frameSize").toSize();
+</pre>
+
+<h3><a name=size></a>QSize size</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("size").toSize();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSize newValue = ...
+	object->setProperty("size", newValue);
+</pre>
+Or using the <a href="#setSize">setSize</a> slot.
+
+<h3><a name=width></a>int width</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("width").toInt();
+</pre>
+
+<h3><a name=height></a>int height</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("height").toInt();
+</pre>
+
+<h3><a name=rect></a>QRect rect</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRect val = object->property("rect").toRect();
+</pre>
+
+<h3><a name=childrenRect></a>QRect childrenRect</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRect val = object->property("childrenRect").toRect();
+</pre>
+
+<h3><a name=childrenRegion></a>QRegion childrenRegion</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QRegion val = object->property("childrenRegion").toRegion();
+</pre>
+
+<h3><a name=sizePolicy></a>QSizePolicy sizePolicy</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSizePolicy val = object->property("sizePolicy").toSizePolicy();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSizePolicy newValue = ...
+	object->setProperty("sizePolicy", newValue);
+</pre>
+Or using the <a href="#setSizePolicy">setSizePolicy</a> slot.
+
+<h3><a name=minimumSize></a>QSize minimumSize</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("minimumSize").toSize();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSize newValue = ...
+	object->setProperty("minimumSize", newValue);
+</pre>
+Or using the <a href="#setMinimumSize">setMinimumSize</a> slot.
+
+<h3><a name=maximumSize></a>QSize maximumSize</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("maximumSize").toSize();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSize newValue = ...
+	object->setProperty("maximumSize", newValue);
+</pre>
+Or using the <a href="#setMaximumSize">setMaximumSize</a> slot.
+
+<h3><a name=minimumWidth></a>int minimumWidth</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("minimumWidth").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("minimumWidth", newValue);
+</pre>
+Or using the <a href="#setMinimumWidth">setMinimumWidth</a> slot.
+
+<h3><a name=minimumHeight></a>int minimumHeight</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("minimumHeight").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("minimumHeight", newValue);
+</pre>
+Or using the <a href="#setMinimumHeight">setMinimumHeight</a> slot.
+
+<h3><a name=maximumWidth></a>int maximumWidth</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("maximumWidth").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("maximumWidth", newValue);
+</pre>
+Or using the <a href="#setMaximumWidth">setMaximumWidth</a> slot.
+
+<h3><a name=maximumHeight></a>int maximumHeight</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("maximumHeight").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("maximumHeight", newValue);
+</pre>
+Or using the <a href="#setMaximumHeight">setMaximumHeight</a> slot.
+
+<h3><a name=sizeIncrement></a>QSize sizeIncrement</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("sizeIncrement").toSize();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSize newValue = ...
+	object->setProperty("sizeIncrement", newValue);
+</pre>
+Or using the <a href="#setSizeIncrement">setSizeIncrement</a> slot.
+
+<h3><a name=baseSize></a>QSize baseSize</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("baseSize").toSize();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QSize newValue = ...
+	object->setProperty("baseSize", newValue);
+</pre>
+Or using the <a href="#setBaseSize">setBaseSize</a> slot.
+
+<h3><a name=palette></a>QPalette palette</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QPalette val = object->property("palette").toPalette();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QPalette newValue = ...
+	object->setProperty("palette", newValue);
+</pre>
+Or using the <a href="#setPalette">setPalette</a> slot.
+
+<h3><a name=font></a>QFont font</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QFont val = object->property("font").toFont();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QFont newValue = ...
+	object->setProperty("font", newValue);
+</pre>
+Or using the <a href="#setFont">setFont</a> slot.
+
+<h3><a name=cursor></a>QCursor cursor</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QCursor val = object->property("cursor").toCursor();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QCursor newValue = ...
+	object->setProperty("cursor", newValue);
+</pre>
+Or using the <a href="#setCursor">setCursor</a> slot.
+
+<h3><a name=mouseTracking></a>bool mouseTracking</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("mouseTracking").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("mouseTracking", newValue);
+</pre>
+Or using the <a href="#setMouseTracking">setMouseTracking</a> slot.
+
+<h3><a name=tabletTracking></a>bool tabletTracking</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("tabletTracking").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("tabletTracking", newValue);
+</pre>
+Or using the <a href="#setTabletTracking">setTabletTracking</a> slot.
+
+<h3><a name=isActiveWindow></a>bool isActiveWindow</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("isActiveWindow").toBool();
+</pre>
+
+<h3><a name=focusPolicy></a>Qt::FocusPolicy focusPolicy</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("focusPolicy").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ... // string representation of values also supported
+	object->setProperty("focusPolicy", newValue);
+</pre>
+Or using the <a href="#setFocusPolicy">setFocusPolicy</a> slot.
+<p>See also <a href="#Qt::FocusPolicy">Qt::FocusPolicy</a>.
+
+<h3><a name=focus></a>bool focus</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("focus").toBool();
+</pre>
+
+<h3><a name=contextMenuPolicy></a>Qt::ContextMenuPolicy contextMenuPolicy</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("contextMenuPolicy").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ... // string representation of values also supported
+	object->setProperty("contextMenuPolicy", newValue);
+</pre>
+Or using the <a href="#setContextMenuPolicy">setContextMenuPolicy</a> slot.
+<p>See also <a href="#Qt::ContextMenuPolicy">Qt::ContextMenuPolicy</a>.
+
+<h3><a name=updatesEnabled></a>bool updatesEnabled</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("updatesEnabled").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("updatesEnabled", newValue);
+</pre>
+Or using the <a href="#setUpdatesEnabled">setUpdatesEnabled</a> slot.
+
+<h3><a name=visible></a>bool visible</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("visible").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("visible", newValue);
+</pre>
+Or using the <a href="#setVisible">setVisible</a> slot.
+
+<h3><a name=minimized></a>bool minimized</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("minimized").toBool();
+</pre>
+
+<h3><a name=maximized></a>bool maximized</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("maximized").toBool();
+</pre>
+
+<h3><a name=fullScreen></a>bool fullScreen</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("fullScreen").toBool();
+</pre>
+
+<h3><a name=sizeHint></a>QSize sizeHint</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("sizeHint").toSize();
+</pre>
+
+<h3><a name=minimumSizeHint></a>QSize minimumSizeHint</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QSize val = object->property("minimumSizeHint").toSize();
+</pre>
+
+<h3><a name=acceptDrops></a>bool acceptDrops</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("acceptDrops").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("acceptDrops", newValue);
+</pre>
+Or using the <a href="#setAcceptDrops">setAcceptDrops</a> slot.
+
+<h3><a name=windowTitle></a>QString windowTitle</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("windowTitle").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("windowTitle", newValue);
+</pre>
+Or using the <a href="#setWindowTitle">setWindowTitle</a> slot.
+
+<h3><a name=windowIcon></a>QIcon windowIcon</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QIcon val = object->property("windowIcon").toIcon();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QIcon newValue = ...
+	object->setProperty("windowIcon", newValue);
+</pre>
+Or using the <a href="#setWindowIcon">setWindowIcon</a> slot.
+
+<h3><a name=windowIconText></a>QString windowIconText</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("windowIconText").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("windowIconText", newValue);
+</pre>
+Or using the <a href="#setWindowIconText">setWindowIconText</a> slot.
+
+<h3><a name=windowOpacity></a>double windowOpacity</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	double val = object->property("windowOpacity").toDouble();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	double newValue = ...
+	object->setProperty("windowOpacity", newValue);
+</pre>
+Or using the <a href="#setWindowOpacity">setWindowOpacity</a> slot.
+
+<h3><a name=windowModified></a>bool windowModified</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("windowModified").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("windowModified", newValue);
+</pre>
+Or using the <a href="#setWindowModified">setWindowModified</a> slot.
+
+<h3><a name=toolTip></a>QString toolTip</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("toolTip").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("toolTip", newValue);
+</pre>
+Or using the <a href="#setToolTip">setToolTip</a> slot.
+
+<h3><a name=toolTipDuration></a>int toolTipDuration</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("toolTipDuration").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("toolTipDuration", newValue);
+</pre>
+Or using the <a href="#setToolTipDuration">setToolTipDuration</a> slot.
+
+<h3><a name=statusTip></a>QString statusTip</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("statusTip").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("statusTip", newValue);
+</pre>
+Or using the <a href="#setStatusTip">setStatusTip</a> slot.
+
+<h3><a name=whatsThis></a>QString whatsThis</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("whatsThis").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("whatsThis", newValue);
+</pre>
+Or using the <a href="#setWhatsThis">setWhatsThis</a> slot.
+
+<h3><a name=accessibleName></a>QString accessibleName</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("accessibleName").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("accessibleName", newValue);
+</pre>
+Or using the <a href="#setAccessibleName">setAccessibleName</a> slot.
+
+<h3><a name=accessibleDescription></a>QString accessibleDescription</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("accessibleDescription").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("accessibleDescription", newValue);
+</pre>
+Or using the <a href="#setAccessibleDescription">setAccessibleDescription</a> slot.
+
+<h3><a name=layoutDirection></a>Qt::LayoutDirection layoutDirection</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("layoutDirection").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ... // string representation of values also supported
+	object->setProperty("layoutDirection", newValue);
+</pre>
+Or using the <a href="#setLayoutDirection">setLayoutDirection</a> slot.
+<p>See also <a href="#Qt::LayoutDirection">Qt::LayoutDirection</a>.
+
+<h3><a name=autoFillBackground></a>bool autoFillBackground</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("autoFillBackground").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("autoFillBackground", newValue);
+</pre>
+Or using the <a href="#setAutoFillBackground">setAutoFillBackground</a> slot.
+
+<h3><a name=styleSheet></a>QString styleSheet</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("styleSheet").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("styleSheet", newValue);
+</pre>
+Or using the <a href="#setStyleSheet">setStyleSheet</a> slot.
+
+<h3><a name=locale></a>QLocale locale</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QLocale val = object->property("locale").toLocale();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QLocale newValue = ...
+	object->setProperty("locale", newValue);
+</pre>
+Or using the <a href="#setLocale">setLocale</a> slot.
+
+<h3><a name=windowFilePath></a>QString windowFilePath</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("windowFilePath").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("windowFilePath", newValue);
+</pre>
+Or using the <a href="#setWindowFilePath">setWindowFilePath</a> slot.
+
+<h3><a name=inputMethodHints></a>Qt::InputMethodHints inputMethodHints</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("inputMethodHints").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ... // string representation of values also supported
+	object->setProperty("inputMethodHints", newValue);
+</pre>
+Or using the <a href="#setInputMethodHints">setInputMethodHints</a> slot.
+<p>See also <a href="#Qt::InputMethodHints">Qt::InputMethodHints</a>.
+
+<h3><a name=AdvancedSettings></a>IDispatch* AdvancedSettings</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings2></a>IDispatch* AdvancedSettings2</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings2").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings3></a>IDispatch* AdvancedSettings3</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings3").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings4></a>IDispatch* AdvancedSettings4</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings4").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings5></a>IDispatch* AdvancedSettings5</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings5").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings6></a>IDispatch* AdvancedSettings6</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings6").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings7></a>IDispatch* AdvancedSettings7</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings7").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings8></a>IDispatch* AdvancedSettings8</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings8").toIDispatch*();
+</pre>
+
+<h3><a name=AdvancedSettings9></a>IDispatch* AdvancedSettings9</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("AdvancedSettings9").toIDispatch*();
+</pre>
+
+<h3><a name=CipherStrength></a>int CipherStrength</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("CipherStrength").toInt();
+</pre>
+
+<h3><a name=ColorDepth></a>int ColorDepth</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("ColorDepth").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("ColorDepth", newValue);
+</pre>
+Or using the <a href="#SetColorDepth">SetColorDepth</a> slot.
+
+<h3><a name=Connected></a>int Connected</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("Connected").toInt();
+</pre>
+
+<h3><a name=ConnectedStatusText></a>QString ConnectedStatusText</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("ConnectedStatusText").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("ConnectedStatusText", newValue);
+</pre>
+Or using the <a href="#SetConnectedStatusText">SetConnectedStatusText</a> slot.
+
+<h3><a name=ConnectingText></a>QString ConnectingText</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("ConnectingText").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("ConnectingText", newValue);
+</pre>
+Or using the <a href="#SetConnectingText">SetConnectingText</a> slot.
+
+<h3><a name=Debugger></a>IDispatch* Debugger</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("Debugger").toIDispatch*();
+</pre>
+
+<h3><a name=DesktopHeight></a>int DesktopHeight</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("DesktopHeight").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("DesktopHeight", newValue);
+</pre>
+Or using the <a href="#SetDesktopHeight">SetDesktopHeight</a> slot.
+
+<h3><a name=DesktopWidth></a>int DesktopWidth</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("DesktopWidth").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("DesktopWidth", newValue);
+</pre>
+Or using the <a href="#SetDesktopWidth">SetDesktopWidth</a> slot.
+
+<h3><a name=DisconnectedText></a>QString DisconnectedText</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("DisconnectedText").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("DisconnectedText", newValue);
+</pre>
+Or using the <a href="#SetDisconnectedText">SetDisconnectedText</a> slot.
+
+<h3><a name=Domain></a>QString Domain</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("Domain").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("Domain", newValue);
+</pre>
+Or using the <a href="#SetDomain">SetDomain</a> slot.
+
+<h3><a name=ExtendedDisconnectReason></a>__MIDL___MIDL_itf_mstsax_0000_0000_0001 ExtendedDisconnectReason</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("ExtendedDisconnectReason").toInt();
+</pre>
+<p>See also <a href="#__MIDL___MIDL_itf_mstsax_0000_0000_0001">__MIDL___MIDL_itf_mstsax_0000_0000_0001</a>.
+
+<h3><a name=FullScreen></a>bool FullScreen</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	bool val = object->property("FullScreen").toBool();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	bool newValue = ...
+	object->setProperty("FullScreen", newValue);
+</pre>
+Or using the <a href="#SetFullScreen">SetFullScreen</a> slot.
+
+<h3><a name=FullScreenTitle></a>QString FullScreenTitle</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("FullScreenTitle").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("FullScreenTitle", newValue);
+</pre>
+Or using the <a href="#SetFullScreenTitle">SetFullScreenTitle</a> slot.
+
+<h3><a name=HorizontalScrollBarVisible></a>int HorizontalScrollBarVisible</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("HorizontalScrollBarVisible").toInt();
+</pre>
+
+<h3><a name=MsRdpClientShell></a>IDispatch* MsRdpClientShell</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("MsRdpClientShell").toIDispatch*();
+</pre>
+
+<h3><a name=RemoteProgram></a>IDispatch* RemoteProgram</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("RemoteProgram").toIDispatch*();
+</pre>
+
+<h3><a name=RemoteProgram2></a>IDispatch* RemoteProgram2</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("RemoteProgram2").toIDispatch*();
+</pre>
+
+<h3><a name=RemoteProgram3></a>IDispatch* RemoteProgram3</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("RemoteProgram3").toIDispatch*();
+</pre>
+
+<h3><a name=SecuredSettings></a>IDispatch* SecuredSettings</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("SecuredSettings").toIDispatch*();
+</pre>
+
+<h3><a name=SecuredSettings2></a>IDispatch* SecuredSettings2</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("SecuredSettings2").toIDispatch*();
+</pre>
+
+<h3><a name=SecuredSettings3></a>IDispatch* SecuredSettings3</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("SecuredSettings3").toIDispatch*();
+</pre>
+
+<h3><a name=SecuredSettingsEnabled></a>int SecuredSettingsEnabled</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("SecuredSettingsEnabled").toInt();
+</pre>
+
+<h3><a name=Server></a>QString Server</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("Server").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("Server", newValue);
+</pre>
+Or using the <a href="#SetServer">SetServer</a> slot.
+
+<h3><a name=StartConnected></a>int StartConnected</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("StartConnected").toInt();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	int newValue = ...
+	object->setProperty("StartConnected", newValue);
+</pre>
+Or using the <a href="#SetStartConnected">SetStartConnected</a> slot.
+
+<h3><a name=TransportSettings></a>IDispatch* TransportSettings</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("TransportSettings").toIDispatch*();
+</pre>
+
+<h3><a name=TransportSettings2></a>IDispatch* TransportSettings2</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("TransportSettings2").toIDispatch*();
+</pre>
+
+<h3><a name=TransportSettings3></a>IDispatch* TransportSettings3</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("TransportSettings3").toIDispatch*();
+</pre>
+
+<h3><a name=TransportSettings4></a>IDispatch* TransportSettings4</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	IDispatch* val = object->property("TransportSettings4").toIDispatch*();
+</pre>
+
+<h3><a name=UserName></a>QString UserName</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("UserName").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("UserName", newValue);
+</pre>
+Or using the <a href="#SetUserName">SetUserName</a> slot.
+
+<h3><a name=Version></a>QString Version</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("Version").toString();
+</pre>
+
+<h3><a name=VerticalScrollBarVisible></a>int VerticalScrollBarVisible</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	int val = object->property("VerticalScrollBarVisible").toInt();
+</pre>
+
+<h3><a name=control></a>QString control</h3>
+<p>
+<p>Read this property's value using QObject::property:
+<pre>
+	QString val = object->property("control").toString();
+</pre>
+Set this property' value using QObject::setProperty:
+<pre>
+	QString newValue = ...
+	object->setProperty("control", newValue);
+</pre>
+Or using the <a href="#setControl">setControl</a> slot.

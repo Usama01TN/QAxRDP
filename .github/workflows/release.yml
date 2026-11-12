@@ -1,0 +1,261 @@
+# Release QAxRDP: validate -> test -> build -> PyPI -> GitHub release "v<version>".
+#
+# Runs when QAxRDP/version.py changes on main/master, or manually (Actions > Release > Run workflow).
+# The GitHub release and its tag are forced: an existing "v<version>" release/tag is deleted and recreated on the
+# current commit. PyPI never allows replacing a published version: if it is already there, the PyPI job is skipped
+# with a warning and the GitHub release is still (re)made. Nothing is published unless every check passes, and the
+# GitHub release is only made after PyPI succeeded (or was skipped).
+#
+# PyPI authentication (one of them, see README "Releasing"):
+#   - Trusted publishing: a (pending) publisher on PyPI for this repository, workflow "release.yml",
+#     environment "pypi". No secret needed.
+#   - API token: a repository secret named PYPI_API_TOKEN.
+name: Release
+
+on:
+  push:
+    branches: [main, master]
+    paths: ['QAxRDP/version.py']
+  workflow_dispatch:
+    inputs:
+      publish_pypi:
+        description: Publish on PyPI (skipped anyway when the version is already there)
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Validate version and changelog
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      tag: ${{ steps.meta.outputs.tag }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+      on_pypi: ${{ steps.pypi.outputs.exists }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Read version, check CHANGELOG.md
+        id: meta
+        run: |
+          set -euo pipefail
+          version="$(python .github/scripts/release.py version)"
+          python .github/scripts/release.py notes "$version" > /dev/null
+          {
+            echo "version=$version"
+            echo "tag=v$version"
+            echo "prerelease=$(python .github/scripts/release.py prerelease "$version")"
+          } >> "$GITHUB_OUTPUT"
+          echo "Releasing QAxRDP $version (tag v$version) from $GITHUB_SHA"
+      - name: Is this version already on PyPI?
+        id: pypi
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          set -euo pipefail
+          code="$(curl -sS --retry 5 --retry-all-errors -o /dev/null -w '%{http_code}' \
+            "https://pypi.org/pypi/QAxRDP/$VERSION/json")"
+          case "$code" in
+            200) echo "exists=true" >> "$GITHUB_OUTPUT"
+                 echo "::warning::QAxRDP $VERSION is already on PyPI, which never allows replacing a version: PyPI is skipped. Bump QAxRDP/version.py to publish a new one." ;;
+            404) echo "exists=false" >> "$GITHUB_OUTPUT" ;;
+            *)   echo "::error::Unexpected answer $code from PyPI"; exit 1 ;;
+          esac
+
+  test:
+    name: Tests (${{ matrix.package }}, Python ${{ matrix.python }})
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - { python: '3.10', binding: pyqt5, package: PyQt5 }
+          - { python: '3.12', binding: pyqt5, package: PyQt5 }
+          - { python: '3.13', binding: pyqt5, package: PyQt5 }
+          - { python: '3.12', binding: pyside6, package: PySide6-Essentials }
+    env:
+      QT_API: ${{ matrix.binding }}
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install the libraries Qt needs
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends \
+            libegl1 libgl1 libxkbcommon0 libfontconfig1 libdbus-1-3 libglib2.0-0t64
+      - name: Install ManyQt and ${{ matrix.package }}
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ManyQt "${{ matrix.package }}"
+      - name: Run the test suite
+        run: python -m unittest discover -s tests -v
+
+  test-windows:
+    # The only place where the real MsTscAx ActiveX control exists. Informational: a hosted runner may lack the
+    # interactive desktop the control needs, so a failure here is reported but does not block the release.
+    name: Tests on Windows (ActiveX, informational)
+    needs: prepare
+    runs-on: windows-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install ManyQt and PyQt5
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ManyQt PyQt5
+      - name: Run the test suite (ActiveX tests included)
+        run: python -m unittest discover -s tests -v
+
+  build:
+    name: Build and check distributions
+    needs: [prepare, test]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      VERSION: ${{ needs.prepare.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Build sdist and wheel
+        # setup.py makes the README links absolute (GITHUB_REPOSITORY, GITHUB_SHA) so they work on PyPI.
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+      - name: Check distributions
+        run: |
+          python .github/scripts/release.py check-dist "$VERSION" dist
+          python -m twine check --strict dist/*
+      - name: Install the wheel in a clean environment
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends \
+            libegl1 libgl1 libxkbcommon0 libfontconfig1 libdbus-1-3 libglib2.0-0t64
+          python -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/python" -m pip install --upgrade pip
+          "$RUNNER_TEMP/venv/bin/python" -m pip install "dist/qaxrdp-$VERSION-py3-none-any.whl" PyQt5
+          export PATH="$RUNNER_TEMP/venv/bin:$PATH"
+          python .github/scripts/release.py check-install "$VERSION"
+          cd "$RUNNER_TEMP"  # Outside the checkout: import the installed wheel, not the source tree.
+          qaxrdp-designer --print-env
+          python -c "import QAxRDP, sys; assert QAxRDP.__version__ == sys.argv[1], QAxRDP.__version__" "$VERSION"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  pypi:
+    name: Publish on PyPI
+    needs: [prepare, build]
+    if: needs.prepare.outputs.on_pypi == 'false' && (github.event_name != 'workflow_dispatch' || inputs.publish_pypi)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/project/QAxRDP/${{ needs.prepare.outputs.version }}/
+    permissions:
+      id-token: write  # Trusted publishing.
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          # Empty when the secret does not exist: the action then uses trusted publishing.
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          # Attestations need trusted publishing.
+          attestations: ${{ secrets.PYPI_API_TOKEN == '' }}
+          print-hash: true
+
+  github-release:
+    name: GitHub release ${{ needs.prepare.outputs.tag }}
+    needs: [prepare, build, pypi]
+    if: ${{ !cancelled() && needs.build.result == 'success' && (needs.pypi.result == 'success' || needs.pypi.result == 'skipped') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ needs.prepare.outputs.version }}
+      TAG: ${{ needs.prepare.outputs.tag }}
+      PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+      ON_PYPI: ${{ needs.prepare.outputs.on_pypi == 'true' || needs.pypi.result == 'success' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+      - name: Release notes from CHANGELOG.md
+        run: |
+          set -euo pipefail
+          {
+            python3 .github/scripts/release.py notes "$VERSION"
+            echo
+            echo "## Install"
+            echo
+            if [ "$ON_PYPI" = "true" ]; then
+              echo '```bash'
+              echo "pip install \"QAxRDP[pyqt5]==$VERSION\""
+              echo '```'
+              echo
+              echo "PyPI: https://pypi.org/project/QAxRDP/$VERSION/"
+            else
+              echo "Download the wheel attached to this release, then \`pip install qaxrdp-$VERSION-py3-none-any.whl\`."
+            fi
+          } > "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md"
+      - name: Force (re)create release ${{ needs.prepare.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "Deleting the existing release $TAG and its tag"
+            gh release delete "$TAG" --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" > /dev/null 2>&1; then
+            echo "Deleting the existing tag $TAG"
+            if ! gh api --method DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$TAG"; then
+              # Already gone (deleted with the release a moment ago) is fine; still there is not.
+              if git ls-remote --exit-code --tags origin "refs/tags/$TAG" > /dev/null 2>&1; then
+                echo "::error::Cannot delete tag $TAG: is it protected by a tag ruleset?"
+                exit 1
+              fi
+            fi
+          fi
+          flags=(--latest)
+          if [ "$PRERELEASE" = "true" ]; then flags=(--prerelease --latest=false); fi
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md" "${flags[@]}"
+      - name: Summary
+        run: |
+          {
+            echo "### QAxRDP $VERSION released"
+            echo
+            echo "- GitHub: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/tag/$TAG"
+            if [ "$ON_PYPI" = "true" ]; then echo "- PyPI: https://pypi.org/project/QAxRDP/$VERSION/"; fi
+          } >> "$GITHUB_STEP_SUMMARY"
